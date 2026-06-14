@@ -1,0 +1,13 @@
+# Copy this file to terraform.tfvars and fill in your values
+# terraform.tfvars is gitignored — never commit real values
+
+region           = "us-east-1"
+allowed_ssh_cidr = "YOUR_IP/32"   # Replace with your IP: curl ifconfig.me
+
+# Generate with: ssh-keygen -t ed25519 -C "governance-copilot" -f ~/.ssh/governance-copilot
+# Then paste the content of ~/.ssh/governance-copilot.pub below
+public_key = "ssh-ed25519 AAAA... your-email@example.com"
+
+db_name     = "governance_copilot"
+db_username = "copilot_admin"
+db_password = "CHANGE_ME_min8chars"   # Use a strong password
