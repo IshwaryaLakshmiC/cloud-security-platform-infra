@@ -8,13 +8,13 @@ terraform {
   }
 
   # S3 backend — enable after first apply creates the state bucket
-  # backend "s3" {
-  #   bucket         = "cloud-security-platform-terraform-state-<YOUR_ACCOUNT_ID>"
-  #   key            = "platform/dev/terraform.tfstate"
-  #   region         = "us-east-1"
+   backend "s3" {
+     bucket         = "cloud-security-platform-terraform-state-bucket"
+     key            = "platform/dev/terraform.tfstate"
+     region         = "us-east-1"
   #   dynamodb_table = "cloud-security-platform-terraform-locks"
-  #   encrypt        = true
-  # }
+     encrypt        = true
+   }
 }
 
 provider "aws" {
