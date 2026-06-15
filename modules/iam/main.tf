@@ -182,10 +182,7 @@ resource "aws_iam_policy" "s3_cache_access" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "s3_cache" {
-  role       = aws_iam_role.app_role.name
-  policy_arn = aws_iam_policy.s3_cache_access.arn
-}
+resource "aws_iam_role_policy_attachment" "bedrock" {
   role       = aws_iam_role.app_role.name
   policy_arn = aws_iam_policy.bedrock_access.arn
 }
@@ -193,4 +190,9 @@ resource "aws_iam_role_policy_attachment" "s3_cache" {
 resource "aws_iam_role_policy_attachment" "security_readonly" {
   role       = aws_iam_role.app_role.name
   policy_arn = aws_iam_policy.security_readonly.arn
+}
+
+resource "aws_iam_role_policy_attachment" "s3_cache" {
+  role       = aws_iam_role.app_role.name
+  policy_arn = aws_iam_policy.s3_cache_access.arn
 }
