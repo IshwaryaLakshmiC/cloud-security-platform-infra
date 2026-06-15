@@ -13,9 +13,9 @@ output "ec2_ssh_command" {
   value       = module.ec2.ssh_command
 }
 
-output "rds_host" {
-  description = "RDS PostgreSQL host (shared by both services)"
-  value       = module.rds.db_host
+output "database_info" {
+  description = "PostgreSQL runs locally on the EC2 instance — localhost:5432"
+  value       = "PostgreSQL 15 + pgvector installed on EC2 via userdata. Connect via SSH tunnel if needed."
 }
 
 output "s3_state_bucket" {
@@ -59,27 +59,22 @@ output "next_steps" {
 
     ── Infrastructure ready ──────────────────────────────────────
 
-    1. Initialise database:
-       bash ../../scripts/init-db.sh
-
-    2. SSH into EC2:
+    1. SSH into EC2:
        ${module.ec2.ssh_command}
 
-    3. Deploy Governance Copilot:
+    2. Deploy Governance Copilot:
        git clone https://github.com/IshwaryaLakshmiC/aws-governance-copilot /opt/governance-copilot
        sudo systemctl enable --now governance-copilot
 
-    4. Deploy Discovery Copilot:
+    3. Deploy Discovery Copilot:
        git clone https://github.com/IshwaryaLakshmiC/security-discovery-copilot /opt/discovery-copilot
        sudo systemctl enable --now discovery-copilot
 
-    5. Verify health:
+    4. Verify health:
        curl http://${module.ec2.public_ip}/health
 
-    6. Enable S3 backend (run once):
-       Add state bucket name to backend config in main.tf:
-       bucket = "${module.s3.state_bucket_name}"
-       Then: terraform init -migrate-state
+    Note: PostgreSQL runs locally on EC2 — no RDS needed.
+    DB is initialised automatically via userdata on first boot.
 
     ─────────────────────────────────────────────────────────────
     Governance Copilot:  http://${module.ec2.public_ip}/governance

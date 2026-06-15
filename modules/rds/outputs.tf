@@ -1,5 +1,6 @@
-output "db_endpoint" { value = aws_db_instance.postgres.endpoint }
-output "db_host" { value = aws_db_instance.postgres.address }
-output "db_port" { value = aws_db_instance.postgres.port }
-output "db_name" { value = aws_db_instance.postgres.db_name }
-output "db_username" { value = aws_db_instance.postgres.username }
+# PostgreSQL runs on EC2 localhost — these outputs return local values
+output "db_endpoint" { value = "localhost:5432" }
+output "db_host"     { value = "localhost" }
+output "db_port"     { value = 5432 }
+output "db_name"     { value = var.db_name }
+output "db_username" { value = var.db_username }
