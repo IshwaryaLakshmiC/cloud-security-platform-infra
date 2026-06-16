@@ -187,6 +187,12 @@ resource "aws_iam_role_policy_attachment" "bedrock" {
   policy_arn = aws_iam_policy.bedrock_access.arn
 }
 
+# AWS Marketplace permissions required for Bedrock model access activation
+resource "aws_iam_role_policy_attachment" "marketplace_readonly" {
+  role       = aws_iam_role.app_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSMarketplaceReadonly"
+}
+
 resource "aws_iam_role_policy_attachment" "security_readonly" {
   role       = aws_iam_role.app_role.name
   policy_arn = aws_iam_policy.security_readonly.arn
